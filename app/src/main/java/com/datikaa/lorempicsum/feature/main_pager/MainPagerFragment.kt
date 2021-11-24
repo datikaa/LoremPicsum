@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.datikaa.lorempicsum.databinding.FragmentMainBinding
 import com.datikaa.lorempicsum.extension.onEachWithLifecycle
 import com.datikaa.lorempicsum.feature.main_pager.paging.MainPagerAdapter
@@ -40,11 +42,11 @@ class MainPagerFragment : Fragment() {
         onEachWithLifecycle(viewModel.flow) {
             adapter.submitData(it)
         }
-
-        binding?.mainRecyclerView?.layoutManager = FlexboxLayoutManager(context).apply {
-            flexDirection = FlexDirection.ROW
-            justifyContent = JustifyContent.FLEX_END
-        }
+        binding?.mainRecyclerView?.layoutManager = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
+//        binding?.mainRecyclerView?.layoutManager = FlexboxLayoutManager(context).apply {
+//            flexDirection = FlexDirection.ROW
+//            justifyContent = JustifyContent.FLEX_END
+//        }
         binding?.mainRecyclerView?.adapter = adapter
     }
 

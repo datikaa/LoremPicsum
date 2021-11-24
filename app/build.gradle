@@ -65,6 +65,8 @@ dependencies {
     implementation "io.coil-kt:coil:$coil_version"
     implementation "io.coil-kt:coil-gif:$coil_version"
 
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
     // Paging
     implementation("androidx.paging:paging-runtime:$paging_version")
 
