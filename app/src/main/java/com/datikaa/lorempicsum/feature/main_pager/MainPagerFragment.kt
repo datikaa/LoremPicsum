@@ -18,12 +18,7 @@ import org.koin.core.parameter.parametersOf
 
 class MainPagerFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = MainPagerFragment()
-    }
-
-    private val viewModel: MainPagerViewModel by viewModel { parametersOf(screenMetrics) }
-
+    private val viewModel: MainPagerViewModel by viewModel()
     private var binding: FragmentMainBinding? = null
 
     override fun onCreateView(

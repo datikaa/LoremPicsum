@@ -2,8 +2,10 @@ package com.datikaa.lorempicsum.feature.main_pager.paging
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import com.datikaa.lorempicsum.R
 import com.datikaa.lorempicsum.databinding.MainListItemBinding
 import com.datikaa.lorempicsum.domain.data.PicsumPicture
 import com.datikaa.lorempicsum.extension.screenMetrics
@@ -16,10 +18,10 @@ class MainPagerAdapter :
         parent: ViewGroup,
         viewType: Int
     ): MainPagerViewHolder {
-        val binding =
-            MainListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = MainListItemBinding.inflate(inflater, parent, false)
         binding.root.setOnClickListener {
-
+            it.findNavController().navigate(R.id.action_mainPagerFragment_to_detailsFragment)
         }
         return MainPagerViewHolder(binding)
     }
