@@ -1,5 +1,8 @@
 package com.datikaa.lorempicsum.extension
 
+import android.util.Log
+import android.view.View
+import android.view.ViewTreeObserver
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleCoroutineScope
@@ -32,4 +35,15 @@ fun <T> Fragment.onEachWithLifecycle(
 
 val Fragment.loremPicsumActivity: LoremPicsumActivity
     get() = this.activity as LoremPicsumActivity
+
+fun Fragment.postponeEnterTransitionUntilLaidOut(view: View) {
+    postponeEnterTransition()
+    view.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+        override fun onGlobalLayout() {
+            view.viewTreeObserver.removeOnGlobalLayoutListener(this)
+            startPostponedEnterTransition()
+        }
+    })
+}
+
 

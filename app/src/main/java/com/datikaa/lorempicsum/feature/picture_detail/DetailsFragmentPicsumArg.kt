@@ -6,5 +6,6 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class DetailsFragmentPicsumArg(
     val id: Int,
+    val url: String,
     val downloadUrl: String,
 ): Parcelable

@@ -3,6 +3,7 @@ package com.datikaa.lorempicsum.feature.main_pager.paging
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.datikaa.lorempicsum.databinding.MainListItemBinding
@@ -10,6 +11,7 @@ import com.datikaa.lorempicsum.domain.data.PicsumPicture
 import com.datikaa.lorempicsum.extension.screenMetrics
 import com.datikaa.lorempicsum.extension.toAdapterItem
 import com.datikaa.lorempicsum.feature.main_pager.MainPagerFragmentDirections
+import com.datikaa.lorempicsum.feature.main_pager.model.url
 import com.datikaa.lorempicsum.feature.picture_detail.DetailsFragmentPicsumArg
 
 class MainPagerAdapter :
@@ -23,10 +25,11 @@ class MainPagerAdapter :
         val binding = MainListItemBinding.inflate(inflater, parent, false)
         return MainPagerViewHolder(binding).apply {
             this.binding.root.setOnClickListener {
-                val item = getItem(bindingAdapterPosition) ?: return@setOnClickListener
-                val args = DetailsFragmentPicsumArg(item.id, item.downloadUrl)
+                val item = getItem(bindingAdapterPosition)?.calculateSize()?.toAdapterItem() ?: return@setOnClickListener
+                val extras = FragmentNavigatorExtras(this.binding.imageView to "imageView_${item.id}")
+                val args = DetailsFragmentPicsumArg(item.id, item.url, item.downloadUrl)
                 val action = MainPagerFragmentDirections.actionMainPagerFragmentToDetailsFragment(args)
-                it.findNavController().navigate(action)
+                it.findNavController().navigate(action, extras)
             }
         }
     }

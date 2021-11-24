@@ -23,4 +23,5 @@ fun PicsumPicture.toAdapterItem() = MainPagerItemModel(
     id = id,
     width = width,
     height = height,
+    downloadUrl = downloadUrl,
 )

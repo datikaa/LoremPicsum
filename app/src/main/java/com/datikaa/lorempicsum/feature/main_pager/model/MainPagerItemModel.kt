@@ -4,6 +4,7 @@ data class MainPagerItemModel(
     val id: Int,
     val width: Int,
     val height: Int,
+    val downloadUrl: String,
 )
 
 val MainPagerItemModel.url: String

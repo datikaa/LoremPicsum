@@ -4,13 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.postDelayed
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.transition.TransitionInflater
 import com.datikaa.lorempicsum.databinding.FragmentMainBinding
 import com.datikaa.lorempicsum.extension.doOnApplyWindowInsets
 import com.datikaa.lorempicsum.extension.onEachWithLifecycle
+import com.datikaa.lorempicsum.extension.postponeEnterTransitionUntilLaidOut
 import com.datikaa.lorempicsum.extension.screenMetrics
 import com.datikaa.lorempicsum.feature.main_pager.paging.MainPagerAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
