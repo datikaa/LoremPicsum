@@ -3,19 +3,25 @@ package com.datikaa.lorempicsum
 import android.os.Bundle
 import android.util.DisplayMetrics
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
+import com.datikaa.lorempicsum.databinding.ActivityLoremPicsumBinding
 import com.datikaa.lorempicsum.feature.main_pager.MainPagerFragment
-
 
 class LoremPicsumActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityLoremPicsumBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityLoremPicsumBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, MainPagerFragment.newInstance())
                 .commitNow()
         }
+
+        WindowCompat.setDecorFitsSystemWindows(window, false)
     }
 }
 
