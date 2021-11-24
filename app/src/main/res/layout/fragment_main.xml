@@ -13,6 +13,8 @@
         android:layout_height="match_parent"
         android:clipToPadding="false"
         android:padding="5dp"
-        tools:listitem="@layout/main_list_item" />
+        tools:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+        tools:listitem="@layout/main_list_item"
+        tools:spanCount="2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

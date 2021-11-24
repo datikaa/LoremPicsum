@@ -16,7 +16,6 @@ import com.datikaa.lorempicsum.feature.main_pager.paging.MainPagerAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-
 class MainPagerFragment : Fragment() {
 
     companion object {
@@ -44,7 +43,8 @@ class MainPagerFragment : Fragment() {
             adapter.submitData(it)
         }
 
-        binding?.mainRecyclerView?.layoutManager = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
+        binding?.mainRecyclerView?.layoutManager =
+            StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
         binding?.mainRecyclerView?.adapter = adapter
 
         binding?.mainRecyclerView?.doOnApplyWindowInsets { v, windowInsets, initialPadding ->
