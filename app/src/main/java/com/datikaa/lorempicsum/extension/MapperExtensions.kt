@@ -21,5 +21,5 @@ fun PicsumResponseItem.toDomainModel() = PicsumPicture(
  */
 fun PicsumPicture?.toAdapterItem() = MainPagerItemModel(
     id = this?.id,
-    url = this?.downloadUrl,
+    url = this?.let { "https://picsum.photos/id/$id/$width/$height" },
 )
