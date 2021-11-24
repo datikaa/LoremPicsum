@@ -25,5 +25,5 @@ class MainViewModel : ViewModel() {
 
 private fun ListItem.toUiModel() = MainItemModel(
     id = id,
-    url = "https://picsum.photos/id/${width / 2 as Int}/${height / 2 as Int}",
+    url = downloadUrl,
 )
