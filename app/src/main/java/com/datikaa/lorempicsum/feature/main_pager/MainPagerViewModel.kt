@@ -34,23 +34,5 @@ class MainPagerViewModel(
         )
     ) {
         MainPagerPagingSource(picsumService)
-    }.flow.map { pagingData ->
-        pagingData.map { picsumPicture ->
-            picsumPicture.calculateSize().also {
-                Log.d("teszt", "final size: ${it.width}/${it.height}")
-            }
-        }
-    }.cachedIn(viewModelScope)
-
-    /**
-     * Recursively calculate image size by reducing it in 10% increments
-     */
-    private fun PicsumPicture.calculateSize(): PicsumPicture {
-        return if (width > screenMetrics.width / 2) {
-            copy(
-                width = (width / 1.1).toInt(),
-                height = (height / 1.1).toInt(),
-            ).calculateSize()
-        } else this
-    }
+    }.flow.cachedIn(viewModelScope)
 }

@@ -6,6 +6,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.datikaa.lorempicsum.databinding.MainListItemBinding
 import com.datikaa.lorempicsum.domain.data.PicsumPicture
+import com.datikaa.lorempicsum.extension.screenMetrics
 import com.datikaa.lorempicsum.extension.toAdapterItem
 
 class MainPagerAdapter :
@@ -22,7 +23,19 @@ class MainPagerAdapter :
 
     override fun onBindViewHolder(holder: MainPagerViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item.toAdapterItem())
+        holder.bind(item?.calculateSize()?.toAdapterItem())
+    }
+
+    /**
+     * Recursively calculate image size by reducing it in 10% increments
+     */
+    private fun PicsumPicture.calculateSize(): PicsumPicture {
+        return if (width > screenMetrics.width / 2) {
+            copy(
+                width = (width / 1.1).toInt(),
+                height = (height / 1.1).toInt(),
+            ).calculateSize()
+        } else this
     }
 
     private object MainPagerAdapterItemDiffer : DiffUtil.ItemCallback<PicsumPicture>() {

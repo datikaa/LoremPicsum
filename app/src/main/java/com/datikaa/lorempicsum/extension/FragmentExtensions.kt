@@ -37,6 +37,3 @@ fun <T> Fragment.onEachWithLifecycle(
 val Fragment.loremPicsumActivity: LoremPicsumActivity
     get() = this.activity as LoremPicsumActivity
 
-val Fragment.screenMetrics: ScreenMetrics by lazy {
-    Resources.getSystem().displayMetrics.toScreenMetrics()
-}

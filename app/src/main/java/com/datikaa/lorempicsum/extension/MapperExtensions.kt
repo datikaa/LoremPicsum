@@ -19,7 +19,8 @@ fun PicsumResponseItem.toDomainModel() = PicsumPicture(
 /**
  * Converts [PicsumPicture] to [MainPagerItemModel]
  */
-fun PicsumPicture?.toAdapterItem() = MainPagerItemModel(
-    id = this?.id,
-    url = this?.let { "https://picsum.photos/id/$id/$width/$height" },
+fun PicsumPicture.toAdapterItem() = MainPagerItemModel(
+    id = id,
+    width = width,
+    height = height,
 )
