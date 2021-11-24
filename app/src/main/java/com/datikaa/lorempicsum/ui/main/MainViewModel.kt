@@ -21,9 +21,9 @@ class MainViewModel : ViewModel() {
             _models.emit(currentListOfModels)
         }
     }
-}
 
-private fun ListItem.toUiModel() = MainItemModel(
-    id = id,
-    url = downloadUrl,
-)
+    private fun ListItem.toUiModel() = MainItemModel(
+        id = id,
+        url = downloadUrl,
+    )
+}
