@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class ListItem(
+data class PicsumResponseItem(
     @Json(name = "id") val id: Int,
     @Json(name = "author") val author: String,
     @Json(name = "width") val width: Int,

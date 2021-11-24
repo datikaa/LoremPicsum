@@ -2,7 +2,7 @@ package com.datikaa.lorempicsum
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.datikaa.lorempicsum.feature.main_pager.MainFragment
+import com.datikaa.lorempicsum.feature.main_pager.MainPagerFragment
 
 class LoremPicsumActivity : AppCompatActivity() {
 
@@ -11,7 +11,7 @@ class LoremPicsumActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, MainFragment.newInstance())
+                .replace(R.id.container, MainPagerFragment.newInstance())
                 .commitNow()
         }
     }

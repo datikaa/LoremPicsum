@@ -8,18 +8,20 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.datikaa.lorempicsum.databinding.FragmentMainBinding
 import com.datikaa.lorempicsum.extension.onEachWithLifecycle
+import com.datikaa.lorempicsum.feature.main_pager.paging.MainPagerAdapter
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class MainFragment : Fragment() {
+class MainPagerFragment : Fragment() {
 
     companion object {
-        fun newInstance() = MainFragment()
+        fun newInstance() = MainPagerFragment()
     }
 
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: MainPagerViewModel by viewModel()
 
     private var binding: FragmentMainBinding? = null
 
@@ -34,9 +36,9 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = MainAdapter()
-        onEachWithLifecycle(viewModel.models) {
-            adapter.submitList(it)
+        val adapter = MainPagerAdapter()
+        onEachWithLifecycle(viewModel.flow) {
+            adapter.submitData(it)
         }
 
         binding?.mainRecyclerView?.layoutManager = FlexboxLayoutManager(context).apply {

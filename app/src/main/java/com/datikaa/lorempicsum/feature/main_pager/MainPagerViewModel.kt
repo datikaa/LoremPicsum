@@ -2,20 +2,32 @@ package com.datikaa.lorempicsum.feature.main_pager
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.datikaa.lorempicsum.network.response.ListItem
-import com.datikaa.lorempicsum.network.RetrofitFactory
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
+import com.datikaa.lorempicsum.network.response.PicsumResponseItem
 import com.datikaa.lorempicsum.feature.main_pager.model.MainItemModel
+import com.datikaa.lorempicsum.feature.main_pager.paging.MainPagerPagingSource
 import com.datikaa.lorempicsum.network.PicsumService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class MainViewModel(
+class MainPagerViewModel(
     private val picsumService: PicsumService,
 ) : ViewModel() {
 
     private val _models = MutableStateFlow<List<MainItemModel>>(emptyList())
     val models: StateFlow<List<MainItemModel>> = _models
+
+    val flow = Pager(
+        PagingConfig(
+            pageSize = 20,
+            prefetchDistance = 20,
+        )
+    ) {
+        MainPagerPagingSource(picsumService)
+    }.flow.cachedIn(viewModelScope)
 
     init {
         viewModelScope.launch {
@@ -25,7 +37,7 @@ class MainViewModel(
         }
     }
 
-    private fun ListItem.toUiModel() = MainItemModel(
+    private fun PicsumResponseItem.toUiModel() = MainItemModel(
         id = id,
         url = downloadUrl,
     )
