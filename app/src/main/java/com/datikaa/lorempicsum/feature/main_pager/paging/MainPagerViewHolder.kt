@@ -7,7 +7,7 @@ import com.datikaa.lorempicsum.feature.main_pager.model.MainPagerItemModel
 import com.datikaa.lorempicsum.feature.main_pager.model.url
 import com.squareup.picasso.Picasso
 
-class MainPagerViewHolder(private val binding: MainListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+class MainPagerViewHolder(val binding: MainListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(model: MainPagerItemModel?) {
         model ?: return // TODO: handle error nicer

@@ -5,11 +5,12 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import com.datikaa.lorempicsum.R
 import com.datikaa.lorempicsum.databinding.MainListItemBinding
 import com.datikaa.lorempicsum.domain.data.PicsumPicture
 import com.datikaa.lorempicsum.extension.screenMetrics
 import com.datikaa.lorempicsum.extension.toAdapterItem
+import com.datikaa.lorempicsum.feature.main_pager.MainPagerFragmentDirections
+import com.datikaa.lorempicsum.feature.picture_detail.DetailsFragmentPicsumArg
 
 class MainPagerAdapter :
     PagingDataAdapter<PicsumPicture, MainPagerViewHolder>(MainPagerAdapterItemDiffer) {
@@ -20,10 +21,14 @@ class MainPagerAdapter :
     ): MainPagerViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = MainListItemBinding.inflate(inflater, parent, false)
-        binding.root.setOnClickListener {
-            it.findNavController().navigate(R.id.action_mainPagerFragment_to_detailsFragment)
+        return MainPagerViewHolder(binding).apply {
+            this.binding.root.setOnClickListener {
+                val item = getItem(bindingAdapterPosition) ?: return@setOnClickListener
+                val args = DetailsFragmentPicsumArg(item.id, item.downloadUrl)
+                val action = MainPagerFragmentDirections.actionMainPagerFragmentToDetailsFragment(args)
+                it.findNavController().navigate(action)
+            }
         }
-        return MainPagerViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MainPagerViewHolder, position: Int) {
