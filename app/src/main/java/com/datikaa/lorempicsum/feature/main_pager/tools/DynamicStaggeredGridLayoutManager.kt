@@ -1,4 +1,4 @@
-package com.datikaa.lorempicsum.feature.main_pager
+package com.datikaa.lorempicsum.feature.main_pager.tools
 
 import android.content.Context
 import android.util.AttributeSet
