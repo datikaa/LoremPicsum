@@ -11,7 +11,8 @@
         android:id="@+id/main_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/main_list_item"
-        />
+        android:clipToPadding="false"
+        android:padding="5dp"
+        tools:listitem="@layout/main_list_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
