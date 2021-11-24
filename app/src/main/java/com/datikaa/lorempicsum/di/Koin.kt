@@ -1,17 +1,17 @@
 package com.datikaa.lorempicsum.di
 
 import com.datikaa.lorempicsum.feature.main_pager.MainPagerViewModel
+import com.datikaa.lorempicsum.feature.main_pager.paging.MainPagerPagingSource
 import com.datikaa.lorempicsum.network.RetrofitFactory
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val viewModelModule = module {
-    viewModel {
-        MainPagerViewModel(
-            screenMetrics = get(),
-            picsumService = get(),
-        )
-    }
+    viewModel { MainPagerViewModel(mainPagerPagingSource = get()) }
+}
+
+val repositoryModule = module {
+    factory { MainPagerPagingSource(picsumService = get()) }
 }
 
 val networkModule = module {
