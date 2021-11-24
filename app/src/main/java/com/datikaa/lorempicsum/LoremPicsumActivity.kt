@@ -15,11 +15,6 @@ class LoremPicsumActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoremPicsumBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container, MainPagerFragment.newInstance())
-                .commitNow()
-        }
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
     }
