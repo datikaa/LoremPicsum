@@ -7,7 +7,6 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.datikaa.lorempicsum.feature.main_pager.paging.MainPagerPagingSource
-import com.datikaa.lorempicsum.network.PicsumService
 
 class MainPagerViewModel(
     private val mainPagerPagingSource: MainPagerPagingSource,
