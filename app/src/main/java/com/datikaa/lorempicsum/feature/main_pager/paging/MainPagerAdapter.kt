@@ -18,6 +18,9 @@ class MainPagerAdapter :
     ): MainPagerViewHolder {
         val binding =
             MainListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        binding.root.setOnClickListener {
+
+        }
         return MainPagerViewHolder(binding)
     }
 

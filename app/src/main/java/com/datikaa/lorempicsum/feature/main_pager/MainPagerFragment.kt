@@ -51,6 +51,8 @@ class MainPagerFragment : Fragment() {
             v.updatePadding(
                 top = initialPadding.top + windowInsets.systemWindowInsetTop,
                 bottom = initialPadding.bottom + windowInsets.systemWindowInsetBottom,
+                left = initialPadding.left + windowInsets.systemWindowInsetLeft,
+                right = initialPadding.right + windowInsets.systemWindowInsetRight,
             )
         }
     }
