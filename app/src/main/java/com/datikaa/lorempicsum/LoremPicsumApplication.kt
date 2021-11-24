@@ -1,7 +1,8 @@
 package com.datikaa.lorempicsum
 
 import android.app.Application
-import com.datikaa.lorempicsum.di.viewModelsModule
+import com.datikaa.lorempicsum.di.networkModule
+import com.datikaa.lorempicsum.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -11,8 +12,10 @@ class LoremPicsumApplication : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@LoremPicsumApplication)
-            // declare modules
-            modules(viewModelsModule)
+            modules(
+                viewModelModule,
+                networkModule,
+            )
         }
     }
 }

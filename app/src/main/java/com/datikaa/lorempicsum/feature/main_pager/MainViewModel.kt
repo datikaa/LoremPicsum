@@ -5,11 +5,14 @@ import androidx.lifecycle.viewModelScope
 import com.datikaa.lorempicsum.network.response.ListItem
 import com.datikaa.lorempicsum.network.RetrofitFactory
 import com.datikaa.lorempicsum.feature.main_pager.model.MainItemModel
+import com.datikaa.lorempicsum.network.PicsumService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class MainViewModel : ViewModel() {
+class MainViewModel(
+    private val picsumService: PicsumService,
+) : ViewModel() {
 
     private val _models = MutableStateFlow<List<MainItemModel>>(emptyList())
     val models: StateFlow<List<MainItemModel>> = _models
@@ -17,7 +20,7 @@ class MainViewModel : ViewModel() {
     init {
         viewModelScope.launch {
             val currentListOfModels = _models.value.toMutableList()
-            currentListOfModels += RetrofitFactory.build().list().map { it.toUiModel() }
+            currentListOfModels += picsumService.list().map { it.toUiModel() }
             _models.emit(currentListOfModels)
         }
     }
