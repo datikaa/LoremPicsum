@@ -2,9 +2,9 @@ package com.datikaa.lorempicsum
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.datikaa.lorempicsum.ui.main.MainFragment
+import com.datikaa.lorempicsum.feature.main_pager.MainFragment
 
-class MainActivity : AppCompatActivity() {
+class LoremPicsumActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

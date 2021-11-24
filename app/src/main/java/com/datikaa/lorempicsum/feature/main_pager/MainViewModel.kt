@@ -1,10 +1,10 @@
-package com.datikaa.lorempicsum.ui.main
+package com.datikaa.lorempicsum.feature.main_pager
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.datikaa.lorempicsum.data.ListItem
+import com.datikaa.lorempicsum.network.response.ListItem
 import com.datikaa.lorempicsum.network.RetrofitFactory
-import com.datikaa.lorempicsum.ui.main.model.MainItemModel
+import com.datikaa.lorempicsum.feature.main_pager.model.MainItemModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

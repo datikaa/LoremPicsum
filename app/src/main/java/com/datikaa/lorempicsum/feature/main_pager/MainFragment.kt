@@ -1,4 +1,4 @@
-package com.datikaa.lorempicsum.ui.main
+package com.datikaa.lorempicsum.feature.main_pager
 
 import android.os.Bundle
 import android.view.LayoutInflater

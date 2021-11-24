@@ -1,4 +1,4 @@
-package com.datikaa.lorempicsum.ui.main
+package com.datikaa.lorempicsum.feature.main_pager
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.datikaa.lorempicsum.databinding.MainListItemBinding
-import com.datikaa.lorempicsum.ui.main.model.MainItemModel
+import com.datikaa.lorempicsum.feature.main_pager.model.MainItemModel
 
 class MainAdapter : RecyclerView.Adapter<MainItemViewHolder>() {
 

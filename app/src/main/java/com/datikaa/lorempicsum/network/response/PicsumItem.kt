@@ -1,4 +1,4 @@
-package com.datikaa.lorempicsum.data
+package com.datikaa.lorempicsum.network.response
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
