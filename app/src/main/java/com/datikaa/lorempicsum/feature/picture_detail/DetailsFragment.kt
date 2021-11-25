@@ -57,6 +57,8 @@ class DetailsFragment : Fragment() {
             motionLayout.doOnApplyWindowInsets { v, windowInsets, initialPadding ->
                 v.updatePadding(
                     bottom = initialPadding.bottom + windowInsets.systemWindowInsetBottom,
+                    left = initialPadding.left + windowInsets.systemWindowInsetLeft,
+                    right = initialPadding.right + windowInsets.systemWindowInsetRight,
                 )
             }
 
