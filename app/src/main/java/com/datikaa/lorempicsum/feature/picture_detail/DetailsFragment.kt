@@ -26,14 +26,14 @@ import java.lang.Exception
 class DetailsFragment : Fragment() {
 
     private val args: DetailsFragmentArgs by navArgs()
-    private val viewModel: DetailsViewModel by viewModel { parametersOf(args.picsumArg.downloadUrl) }
+    private val viewModel: DetailsViewModel by viewModel { parametersOf(args.picsumArg) }
 
     private var binding: FragmentDetailsBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedElementEnterTransition = inflateTransition(android.R.transition.move)
-        postponeEnterTransition()
+//        postponeEnterTransition()
     }
 
     override fun onCreateView(
@@ -50,23 +50,24 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val (id, url, downloadUrl) = args.picsumArg
-        Picasso.get().load(url).placeholder(R.drawable.loading_gif)
-            .into(binding?.imageView, object : Callback {
-                override fun onSuccess() {
-                    startPostponedEnterTransition()
-                    Picasso.get().load(downloadUrl).noPlaceholder().into(binding?.imageView)
-                }
-
-                override fun onError(e: Exception?) {
-                    startPostponedEnterTransition()
-                    findNavController().navigateUp()
-                }
-            })
+//        Picasso.get().load(url).placeholder(R.drawable.loading_gif)
+//            .into(binding?.imageView, object : Callback {
+//                override fun onSuccess() {
+//                    startPostponedEnterTransition()
+//                    Picasso.get().load(downloadUrl).noPlaceholder().into(binding?.imageView)
+//                }
+//
+//                override fun onError(e: Exception?) {
+//                    startPostponedEnterTransition()
+//                    findNavController().navigateUp()
+//                }
+//            })
 
         with(binding!!) {
             imageView.setCompatTransitionName("imageView_$id")
 
             onEachWithLifecycle(viewModel.state) {
+                Log.d("teszt", it.toString())
                 state = it
             }
 
