@@ -33,7 +33,6 @@ class DetailsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedElementEnterTransition = inflateTransition(android.R.transition.move)
-//        postponeEnterTransition()
     }
 
     override fun onCreateView(
@@ -49,19 +48,6 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val (id, url, downloadUrl) = args.picsumArg
-//        Picasso.get().load(url).placeholder(R.drawable.loading_gif)
-//            .into(binding?.imageView, object : Callback {
-//                override fun onSuccess() {
-//                    startPostponedEnterTransition()
-//                    Picasso.get().load(downloadUrl).noPlaceholder().into(binding?.imageView)
-//                }
-//
-//                override fun onError(e: Exception?) {
-//                    startPostponedEnterTransition()
-//                    findNavController().navigateUp()
-//                }
-//            })
 
         with(binding!!) {
             imageView.setCompatTransitionName("imageView_$id")
