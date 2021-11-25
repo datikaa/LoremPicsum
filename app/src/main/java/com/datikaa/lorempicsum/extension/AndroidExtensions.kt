@@ -1,8 +1,8 @@
 package com.datikaa.lorempicsum.extension
 
-import android.util.Log
 import android.view.View
 import android.view.ViewTreeObserver
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleCoroutineScope
@@ -44,6 +44,10 @@ fun Fragment.postponeEnterTransitionUntilLaidOut(view: View) {
             startPostponedEnterTransition()
         }
     })
+}
+
+fun View.setCompatTransitionName(transitionName: String) {
+    ViewCompat.setTransitionName(this, transitionName)
 }
 
 

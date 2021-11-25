@@ -16,6 +16,7 @@ import com.datikaa.lorempicsum.R
 import com.datikaa.lorempicsum.databinding.FragmentDetailsBinding
 import com.datikaa.lorempicsum.extension.doOnApplyWindowInsets
 import com.datikaa.lorempicsum.extension.onEachWithLifecycle
+import com.datikaa.lorempicsum.extension.setCompatTransitionName
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -50,7 +51,6 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val (id, url, downloadUrl) = args.picsumArg
-        ViewCompat.setTransitionName(binding!!.imageView, "imageView_$id")
         Picasso.get().load(url).placeholder(R.drawable.loading_gif)
             .into(binding?.imageView, object : Callback {
                 override fun onSuccess() {
@@ -64,25 +64,28 @@ class DetailsFragment : Fragment() {
                 }
             })
 
-        onEachWithLifecycle(viewModel.state) {
-            binding?.state = it
-            Log.d("teszt", it.toString())
-        }
+        with(binding!!) {
+            imageView.setCompatTransitionName("imageView_$id")
 
-        binding?.buttonGroup?.doOnApplyWindowInsets { v, windowInsets, initialPadding ->
-            v.updatePadding(
-                bottom = initialPadding.bottom + windowInsets.systemWindowInsetBottom,
-            )
-        }
-
-        binding?.buttonGroup?.addOnButtonCheckedListener { _, checkedId, _ ->
-            val intent = when(checkedId) {
-                R.id.button_original -> DetailsIntent.Original
-                R.id.button_greyScale -> DetailsIntent.GrayScale
-                R.id.button_blur -> DetailsIntent.Blur
-                else -> throw RuntimeException()
+            onEachWithLifecycle(viewModel.state) {
+                state = it
             }
-            viewModel.submitIntent(intent)
+
+            buttonGroup.doOnApplyWindowInsets { v, windowInsets, initialPadding ->
+                v.updatePadding(
+                    bottom = initialPadding.bottom + windowInsets.systemWindowInsetBottom,
+                )
+            }
+
+            buttonGroup.addOnButtonCheckedListener { _, checkedId, _ ->
+                val intent = when(checkedId) {
+                    buttonOriginal.id -> DetailsIntent.Original
+                    buttonGreyScale.id -> DetailsIntent.GrayScale
+                    buttonBlur.id -> DetailsIntent.Blur
+                    else -> throw RuntimeException()
+                }
+                viewModel.submitIntent(intent)
+            }
         }
     }
 }
