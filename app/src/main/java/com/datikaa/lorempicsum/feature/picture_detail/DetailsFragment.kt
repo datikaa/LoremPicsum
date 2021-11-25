@@ -27,7 +27,8 @@ class DetailsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedElementEnterTransition = inflateTransition(android.R.transition.move)
+        // I don't like the animation, also it's a bit buggy with the MotionLayout
+//        sharedElementEnterTransition = inflateTransition(android.R.transition.move)
     }
 
     override fun onCreateView(
@@ -47,7 +48,7 @@ class DetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with(binding!!) {
-            imageView.setCompatTransitionName("imageView_$id")
+            imageView.setCompatTransitionName("imageView_${args.picsumArg.id}")
 
             onEachWithLifecycle(viewModel.state) {
                 Log.d("teszt", it.toString())
