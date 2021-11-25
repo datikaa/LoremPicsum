@@ -13,9 +13,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.transition.Transition
 import androidx.transition.TransitionInflater
 import com.datikaa.lorempicsum.LoremPicsumActivity
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import com.google.android.material.slider.Slider
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.channels.trySendBlocking
+import kotlinx.coroutines.flow.*
+import java.time.Duration
 
 /**
  * Shorthand for [Flow.flowWithLifecycle] API.
@@ -57,5 +59,21 @@ fun View.setCompatTransitionName(transitionName: String) {
 fun Fragment.inflateTransition(@TransitionRes resourceId: Int): Transition {
     return TransitionInflater.from(context).inflateTransition(resourceId)
 }
+
+data class SliderValueChange(
+    val slider: Slider,
+    val value: Float,
+    val fromUser: Boolean
+)
+
+fun Slider.valueChangeFlow(duration: Long = 500) = callbackFlow {
+    val listener = Slider.OnChangeListener { slider, value, fromUser ->
+        trySendBlocking(SliderValueChange(slider, value, fromUser))
+    }
+    addOnChangeListener(listener)
+    awaitClose {
+        removeOnChangeListener(listener)
+    }
+}.debounce(duration)
 
 

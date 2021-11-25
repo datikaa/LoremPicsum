@@ -70,8 +70,8 @@ class DetailsFragment : Fragment() {
                 viewModel.submitIntent(intent)
             }
 
-            slider.addOnChangeListener { _, value, fromUser ->
-                if (!fromUser) return@addOnChangeListener
+            onEachWithLifecycle(slider.valueChangeFlow()) { (_, value, fromUser) ->
+                if (!fromUser) return@onEachWithLifecycle
                 viewModel.submitIntent(DetailsIntent.BlurValueChange(value.toBlurValue()))
             }
         }
