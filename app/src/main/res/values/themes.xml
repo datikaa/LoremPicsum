@@ -15,4 +15,7 @@
 
         <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
+    <style name="Theme.LoremPicsum.SegmentedButton" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/segmented_button_color_selector</item>
+    </style>
 </resources>
