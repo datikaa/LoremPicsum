@@ -2,12 +2,16 @@ package com.datikaa.lorempicsum.extension
 
 import android.view.View
 import android.view.ViewTreeObserver
+import androidx.annotation.AnimatorRes
+import androidx.annotation.TransitionRes
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.transition.Transition
+import androidx.transition.TransitionInflater
 import com.datikaa.lorempicsum.LoremPicsumActivity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.launchIn
@@ -48,6 +52,10 @@ fun Fragment.postponeEnterTransitionUntilLaidOut(view: View) {
 
 fun View.setCompatTransitionName(transitionName: String) {
     ViewCompat.setTransitionName(this, transitionName)
+}
+
+fun Fragment.inflateTransition(@TransitionRes resourceId: Int): Transition {
+    return TransitionInflater.from(context).inflateTransition(resourceId)
 }
 
 

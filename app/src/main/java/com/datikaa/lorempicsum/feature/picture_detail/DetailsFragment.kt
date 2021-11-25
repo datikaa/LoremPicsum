@@ -11,10 +11,10 @@ import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.transition.TransitionInflater
 import com.datikaa.lorempicsum.R
 import com.datikaa.lorempicsum.databinding.FragmentDetailsBinding
 import com.datikaa.lorempicsum.extension.doOnApplyWindowInsets
+import com.datikaa.lorempicsum.extension.inflateTransition
 import com.datikaa.lorempicsum.extension.onEachWithLifecycle
 import com.datikaa.lorempicsum.extension.setCompatTransitionName
 import com.squareup.picasso.Callback
@@ -32,8 +32,7 @@ class DetailsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedElementEnterTransition =
-            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        sharedElementEnterTransition = inflateTransition(android.R.transition.move)
         postponeEnterTransition()
     }
 
