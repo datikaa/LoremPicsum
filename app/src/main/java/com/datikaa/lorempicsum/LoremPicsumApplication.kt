@@ -20,8 +20,8 @@ class LoremPicsumApplication : Application() {
                 networkModule,
             )
         }
-
-        Picasso.get().isLoggingEnabled = true
-        Picasso.get().setIndicatorsEnabled(true)
+        // Picasso logging
+//        Picasso.get().isLoggingEnabled = true
+//        Picasso.get().setIndicatorsEnabled(true)
     }
 }

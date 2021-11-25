@@ -51,7 +51,6 @@ class DetailsFragment : Fragment() {
             imageView.setCompatTransitionName("imageView_${args.picsumArg.id}")
 
             onEachWithLifecycle(viewModel.state) {
-                Log.d("teszt", it.toString())
                 state = it
             }
 
