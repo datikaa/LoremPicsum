@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">LoremPicsum</string>
+    <string name="text_original">Original</string>
+    <string name="text_grayscale">Grayscale</string>
+    <string name="text_blur">blur</string>
 </resources>
