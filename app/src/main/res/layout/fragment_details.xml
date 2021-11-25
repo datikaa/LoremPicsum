@@ -40,7 +40,8 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="5dp"
-            android:backgroundTint="@color/black"
+            android:clipToPadding="false"
+            android:padding="10dp"
             app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -53,6 +54,7 @@
                 style="@style/Theme.LoremPicsum.SegmentedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clipToPadding="false"
                 android:checked="@{state.selectedButton == SelectedButton.Original}"
                 android:text="@string/text_original"
                 tools:checked="true" />
@@ -62,6 +64,7 @@
                 style="@style/Theme.LoremPicsum.SegmentedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clipToPadding="false"
                 android:checked="@{state.selectedButton == SelectedButton.GreyScale}"
                 android:text="@string/text_grayscale" />
 
@@ -70,6 +73,7 @@
                 style="@style/Theme.LoremPicsum.SegmentedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clipToPadding="false"
                 android:checked="@{state.selectedButton == SelectedButton.Blur}"
                 android:text="@string/text_blur" />
         </com.google.android.material.button.MaterialButtonToggleGroup>
