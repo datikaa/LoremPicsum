@@ -2,6 +2,7 @@ package com.datikaa.lorempicsum.extension
 
 import com.datikaa.lorempicsum.domain.data.PicsumPicture
 import com.datikaa.lorempicsum.feature.main_pager.model.MainPagerItemModel
+import com.datikaa.lorempicsum.feature.picture_detail.BlurValue
 import com.datikaa.lorempicsum.network.response.PicsumResponseItem
 
 /**
@@ -25,3 +26,5 @@ fun PicsumPicture.toAdapterItem() = MainPagerItemModel(
     height = height,
     downloadUrl = downloadUrl,
 )
+
+fun Float.toBlurValue() = BlurValue(this.toInt())

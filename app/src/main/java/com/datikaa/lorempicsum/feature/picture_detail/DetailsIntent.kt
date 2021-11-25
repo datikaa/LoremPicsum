@@ -4,5 +4,5 @@ sealed class DetailsIntent {
     object Original : DetailsIntent()
     object GrayScale : DetailsIntent()
     object Blur : DetailsIntent()
-    data class BlurValueChange(val value: Int) : DetailsIntent()
+    data class BlurValueChange(val blurValue: BlurValue) : DetailsIntent()
 }

@@ -13,69 +13,100 @@
             type="com.datikaa.lorempicsum.feature.picture_detail.DetailsState" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".feature.main_pager.MainPagerFragment">
+        android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            app:layout_constrainedHeight="true"
-            app:layout_constrainedWidth="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/loading_gif"
             bind:picassoUrl="@{state.pictureUrl}" />
 
-        <com.google.android.material.button.MaterialButtonToggleGroup
-            android:id="@+id/button_group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="5dp"
-            android:clipToPadding="false"
-            android:padding="10dp"
-            app:layout_constrainedWidth="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:selectionRequired="true"
-            app:singleSelection="true">
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/motion_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutDescription="@xml/fragment_details_xml_main_scene"
+            app:transitionState="@{state.selectedButton == SelectedButton.Blur ? @id/show_blur : @id/no_blur}"
+            tools:context=".feature.main_pager.MainPagerFragment">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_original"
-                style="@style/Theme.LoremPicsum.SegmentedButton"
+
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/button_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="5dp"
+                android:clipToPadding="false"
+                android:padding="10dp"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintBottom_toTopOf="@id/slider_card"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:selectionRequired="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_original"
+                    style="@style/Theme.LoremPicsum.SegmentedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="@{state.selectedButton == SelectedButton.Original}"
+                    android:clipToPadding="false"
+                    android:text="@string/text_original"
+                    tools:checked="true" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_greyScale"
+                    style="@style/Theme.LoremPicsum.SegmentedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="@{state.selectedButton == SelectedButton.GreyScale}"
+                    android:clipToPadding="false"
+                    android:text="@string/text_grayscale" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_blur"
+                    style="@style/Theme.LoremPicsum.SegmentedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="@{state.selectedButton == SelectedButton.Blur}"
+                    android:clipToPadding="false"
+                    android:text="@string/text_blur" />
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/slider_card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:checked="@{state.selectedButton == SelectedButton.Original}"
-                android:text="@string/text_original"
-                tools:checked="true" />
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                app:cardBackgroundColor="@color/segmented_button_color_selector"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintBottom_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_greyScale"
-                style="@style/Theme.LoremPicsum.SegmentedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:checked="@{state.selectedButton == SelectedButton.GreyScale}"
-                android:text="@string/text_grayscale" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_blur"
-                style="@style/Theme.LoremPicsum.SegmentedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:checked="@{state.selectedButton == SelectedButton.Blur}"
-                android:text="@string/text_blur" />
-        </com.google.android.material.button.MaterialButtonToggleGroup>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/slider"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:stepSize="1.0"
+                    android:value="@{state.blurValueInt}"
+                    android:valueFrom="1.0"
+                    android:valueTo="10.0" />
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+    </FrameLayout>
 </layout>
