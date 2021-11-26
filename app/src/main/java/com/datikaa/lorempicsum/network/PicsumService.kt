@@ -8,9 +8,6 @@ import retrofit2.http.Query
 interface PicsumService {
 
     @GET("v2/list")
-    suspend fun list(): List<PicsumResponseItem>
-
-    @GET("v2/list")
     suspend fun list(@Query("page") page: Int, @Query("limit") limit: Int): List<PicsumResponseItem>
 
     @GET("id/{id}/info")
