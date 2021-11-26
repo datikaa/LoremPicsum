@@ -8,7 +8,8 @@ data class DetailsState(
     val blurValue: BlurValue,
 ) {
 
-    fun getBlurValueInt() = blurValue.value
+    val intBlurValue: Int
+        get() = blurValue.value
 
     enum class SelectedButton {
         Original,
