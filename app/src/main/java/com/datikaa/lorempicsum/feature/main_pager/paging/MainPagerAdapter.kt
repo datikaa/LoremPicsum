@@ -12,7 +12,7 @@ import com.datikaa.lorempicsum.extension.screenMetrics
 import com.datikaa.lorempicsum.extension.toAdapterItem
 import com.datikaa.lorempicsum.feature.main_pager.MainPagerFragmentDirections
 import com.datikaa.lorempicsum.feature.main_pager.model.url
-import com.datikaa.lorempicsum.feature.picture_detail.DetailsFragmentPicsumArg
+import com.datikaa.lorempicsum.feature.picture_detail.tools.DetailsFragmentPicsumArg
 
 class MainPagerAdapter :
     PagingDataAdapter<PicsumPicture, MainPagerViewHolder>(MainPagerAdapterItemDiffer) {

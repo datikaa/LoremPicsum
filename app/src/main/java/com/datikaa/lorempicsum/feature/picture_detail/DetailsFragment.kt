@@ -2,9 +2,7 @@ package com.datikaa.lorempicsum.feature.picture_detail
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.updatePadding
@@ -12,9 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.datikaa.lorempicsum.databinding.FragmentDetailsBinding
 import com.datikaa.lorempicsum.extension.*
-import com.google.android.material.internal.ViewUtils.doOnApplyWindowInsets
-import com.google.android.material.slider.Slider
-import kotlinx.coroutines.flow.debounce
+import com.datikaa.lorempicsum.feature.picture_detail.dynamics.DetailsIntent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 

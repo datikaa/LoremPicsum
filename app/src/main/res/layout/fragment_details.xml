@@ -6,11 +6,11 @@
 
     <data>
 
-        <import type="com.datikaa.lorempicsum.feature.picture_detail.DetailsState.SelectedButton" />
+        <import type="com.datikaa.lorempicsum.feature.picture_detail.dynamics.DetailsState" />
 
         <variable
             name="state"
-            type="com.datikaa.lorempicsum.feature.picture_detail.DetailsState" />
+            type="com.datikaa.lorempicsum.feature.picture_detail.dynamics.DetailsState" />
     </data>
 
     <FrameLayout

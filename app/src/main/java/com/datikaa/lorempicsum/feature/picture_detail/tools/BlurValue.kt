@@ -1,4 +1,4 @@
-package com.datikaa.lorempicsum.feature.picture_detail
+package com.datikaa.lorempicsum.feature.picture_detail.tools
 
 @JvmInline
 value class BlurValue(val value: Int) {

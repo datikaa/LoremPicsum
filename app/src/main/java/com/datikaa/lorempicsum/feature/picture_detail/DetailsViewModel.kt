@@ -2,6 +2,10 @@ package com.datikaa.lorempicsum.feature.picture_detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.datikaa.lorempicsum.feature.picture_detail.dynamics.DetailsIntent
+import com.datikaa.lorempicsum.feature.picture_detail.dynamics.DetailsState
+import com.datikaa.lorempicsum.feature.picture_detail.tools.BlurValue
+import com.datikaa.lorempicsum.feature.picture_detail.tools.DetailsFragmentPicsumArg
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch

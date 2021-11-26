@@ -4,7 +4,7 @@ import android.widget.ImageView
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.databinding.BindingAdapter
 import androidx.databinding.BindingConversion
-import com.datikaa.lorempicsum.feature.picture_detail.BlurValue
+import com.datikaa.lorempicsum.feature.picture_detail.tools.BlurValue
 import com.google.android.material.slider.Slider
 import com.squareup.picasso.Picasso
 

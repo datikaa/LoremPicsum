@@ -1,4 +1,4 @@
-package com.datikaa.lorempicsum.feature.picture_detail
+package com.datikaa.lorempicsum.feature.picture_detail.tools
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

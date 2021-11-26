@@ -1,4 +1,6 @@
-package com.datikaa.lorempicsum.feature.picture_detail
+package com.datikaa.lorempicsum.feature.picture_detail.dynamics
+
+import com.datikaa.lorempicsum.feature.picture_detail.tools.BlurValue
 
 data class DetailsState(
     val pictureUrl: String,
