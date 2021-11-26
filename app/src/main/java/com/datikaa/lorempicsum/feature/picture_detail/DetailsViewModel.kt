@@ -32,9 +32,6 @@ class DetailsViewModel(
                 pictureUrl = picsumArg.downloadUrl,
                 layoutState = DetailsState.LayoutState.NoBlur,
             ).postState()
-        }
-        viewModelScope.launch {
-            delay(1000)
             val picsumResponseItem = picsumService.info(picsumArg.id)
             state.value.copy(
                 info = DetailsState.Info(

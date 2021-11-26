@@ -95,9 +95,9 @@
                 android:layout_marginBottom="20dp"
                 app:cardBackgroundColor="@color/segmented_button_color_selector"
                 app:layout_constrainedWidth="true"
-                app:layout_constraintTop_toBottomOf="@id/button_group"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/button_group">
 
                 <com.google.android.material.slider.Slider
                     android:id="@+id/slider"
@@ -129,36 +129,36 @@
                     android:layout_height="wrap_content"
                     android:padding="10dp">
 
-                    <com.google.android.material.textview.MaterialTextView
+                    <TextView
                         android:id="@+id/author"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
-                        android:text="@{@string/text_author(state.info.author)}"
+                        android:text='@{@string/text_author(state.info.author)}'
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:text="Author: datiKaa" />
 
-                    <com.google.android.material.textview.MaterialTextView
+                    <TextView
                         android:id="@+id/width"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
-                        android:text="@{@string/text_width(state.info.width)}"
+                        android:text='@{@string/text_width(state.info.width)}'
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/author"
                         tools:text="Width: 3600px" />
 
-                    <com.google.android.material.textview.MaterialTextView
+                    <TextView
                         android:id="@+id/height"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
-                        android:text="@{@string/text_height(state.info.height)}"
+                        android:text='@{@string/text_height(state.info.height)}'
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/width"
@@ -181,9 +181,10 @@
             android:id="@+id/info_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:visibility="@{state.info == null ? View.INVISIBLE : View.VISIBLE}"
             android:layout_gravity="top|end"
+            android:padding="10dp"
+            android:animateLayoutChanges="true"
+            android:visibility="@{state.info == null ? View.INVISIBLE : View.VISIBLE}"
             app:srcCompat="@drawable/outline_info_24"
             app:tint="@color/white"
             tools:alpha="1" />

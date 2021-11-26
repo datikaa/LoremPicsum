@@ -62,6 +62,15 @@ class DetailsFragment : Fragment() {
                 )
             }
 
+            infoButton.doOnApplyWindowInsets { v, windowInsets, initialPadding ->
+                v.updatePadding(
+                    top = initialPadding.top + windowInsets.systemWindowInsetTop,
+                    bottom = initialPadding.bottom + windowInsets.systemWindowInsetBottom,
+                    left = initialPadding.left + windowInsets.systemWindowInsetLeft,
+                    right = initialPadding.right + windowInsets.systemWindowInsetRight,
+                )
+            }
+
             buttonGroup.addOnButtonCheckedListener { _, checkedId, _ ->
                 val intent = when (checkedId) {
                     buttonOriginal.id -> DetailsIntent.Original
