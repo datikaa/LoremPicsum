@@ -1,14 +1,17 @@
 package com.datikaa.lorempicsum.feature.picture_detail.dynamics
 
+import android.os.Parcelable
 import com.datikaa.lorempicsum.feature.picture_detail.tools.BlurValue
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class DetailsState(
     val pictureUrl: String,
     val selectedButton: SelectedButton,
     val blurValue: BlurValue,
     val layoutState: LayoutState,
     val info: Info?
-) {
+): Parcelable {
 
     val intBlurValue: Int
         get() = blurValue.value
@@ -26,6 +29,7 @@ data class DetailsState(
         Info,
     }
 
+    @Parcelize
     data class Info(
         val id: String?,
         val author: String?,
@@ -33,7 +37,7 @@ data class DetailsState(
         val height: String?,
         val url: String?,
         val downloadUrl: String?,
-    )
+    ): Parcelable
 }
 
 

@@ -1,5 +1,6 @@
 package com.datikaa.lorempicsum.feature.picture_detail
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datikaa.lorempicsum.feature.picture_detail.dynamics.DetailsDestination
@@ -13,6 +14,7 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class DetailsViewModel(
+    private val savedStateHandle: SavedStateHandle,
     private val picsumService: PicsumService,
     private val picsumArg: DetailsFragmentPicsumArg,
 ) : ViewModel() {
@@ -24,9 +26,11 @@ class DetailsViewModel(
     val state: StateFlow<DetailsState>
 
     init {
-        val initState = initialState()
+        val initState = savedStateHandle["state"] ?: initialState()
         _state = MutableStateFlow(initState)
-        state = _state.stateIn(viewModelScope, SharingStarted.Eagerly, initState)
+        state = _state
+            .onEach { savedStateHandle["state"] = it }
+            .stateIn(viewModelScope, SharingStarted.Eagerly, initState)
         viewModelScope.launch {
             delay(50) // just to have a little time for the initState to work properly
             state.value.copy(

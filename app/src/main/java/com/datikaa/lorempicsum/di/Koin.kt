@@ -9,7 +9,7 @@ import org.koin.dsl.module
 
 val viewModelModule = module {
     viewModel { MainPagerViewModel(mainPagerPagingSource = get()) }
-    viewModel { DetailsViewModel(picsumArg = get(), picsumService = get()) }
+    viewModel { DetailsViewModel(savedStateHandle = get(), picsumArg = get(), picsumService = get()) }
 }
 
 val repositoryModule = module {
