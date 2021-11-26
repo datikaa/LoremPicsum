@@ -6,5 +6,6 @@
     <string name="text_author">Author: %1$s</string>
     <string name="text_height">Height: %1$spx</string>
     <string name="text_width">Width: %1$spx</string>
+    <string name="text_url">URL: %1$spx</string>
     <string name="text_share_picture">Share picture</string>
 </resources>

@@ -6,6 +6,8 @@
 
     <data>
 
+        <import type="android.text.util.Linkify" />
+
         <import type="android.view.View" />
 
         <import type="com.datikaa.lorempicsum.feature.picture_detail.dynamics.DetailsState.SelectedButton" />
@@ -129,7 +131,7 @@
                     android:layout_height="wrap_content"
                     android:padding="10dp">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/author"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -140,7 +142,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         tools:text="Author: datiKaa" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/width"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -151,7 +153,7 @@
                         app:layout_constraintTop_toBottomOf="@id/author"
                         tools:text="Width: 3600px" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/height"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -159,9 +161,22 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
                         android:text='@{@string/text_height(state.info.height)}'
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/width"
+                        tools:text="Height: 2000px" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/url"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:autoLink="web"
+                        android:text='@{@string/text_url(state.info.url)}'
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/height"
                         tools:text="Height: 2000px" />
 
                     <androidx.appcompat.widget.AppCompatImageView
