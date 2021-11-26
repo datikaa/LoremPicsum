@@ -2,6 +2,7 @@ package com.datikaa.lorempicsum.feature.picture_detail
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,6 +49,7 @@ class DetailsFragment : Fragment() {
             imageView.setCompatTransitionName("imageView_${args.picsumArg.id}")
 
             onEachWithLifecycle(viewModel.state) {
+                Log.d("teszt", it.toString())
                 state = it
             }
 

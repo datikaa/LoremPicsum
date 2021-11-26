@@ -6,6 +6,7 @@ import com.datikaa.lorempicsum.feature.picture_detail.dynamics.DetailsIntent
 import com.datikaa.lorempicsum.feature.picture_detail.dynamics.DetailsState
 import com.datikaa.lorempicsum.feature.picture_detail.tools.BlurValue
 import com.datikaa.lorempicsum.feature.picture_detail.tools.DetailsFragmentPicsumArg
+import com.datikaa.lorempicsum.network.PicsumService
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -14,6 +15,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class DetailsViewModel(
+    private val picsumService: PicsumService,
     private val picsumArg: DetailsFragmentPicsumArg,
 ) : ViewModel() {
 
@@ -26,11 +28,21 @@ class DetailsViewModel(
         state = _state.stateIn(viewModelScope, SharingStarted.Eagerly, initState)
         viewModelScope.launch {
             delay(50) // just to have a little time for the initState to work properly
-            val originalPicState = _state.value.copy(
+            state.value.copy(
                 pictureUrl = picsumArg.downloadUrl,
                 layoutState = DetailsState.LayoutState.NoBlur,
-            )
-            _state.emit(originalPicState)
+            ).postState()
+        }
+        viewModelScope.launch {
+            delay(1000)
+            val picsumResponseItem = picsumService.info(picsumArg.id)
+            state.value.copy(
+                info = DetailsState.Info(
+                    author = picsumResponseItem.author,
+                    width = "${picsumResponseItem.width}",
+                    height = "${picsumResponseItem.height}",
+                )
+            ).postState()
         }
     }
 
@@ -45,7 +57,7 @@ class DetailsViewModel(
         }
     }
 
-    private fun changeStateToBlur() = with(_state.value) {
+    private fun changeStateToBlur() = with(state.value) {
         copy(
             selectedButton = DetailsState.SelectedButton.Blur,
             pictureUrl = "${picsumArg.downloadUrl}?blur=${blurValue.value}",
@@ -53,7 +65,7 @@ class DetailsViewModel(
         ).postState()
     }
 
-    private fun changeStateBlurValue(blurValue: BlurValue) = with(_state.value) {
+    private fun changeStateBlurValue(blurValue: BlurValue) = with(state.value) {
         if (this.blurValue == blurValue) return@with
         copy(
             blurValue = blurValue,
@@ -63,7 +75,7 @@ class DetailsViewModel(
         ).postState()
     }
 
-    private fun changeStateToGrayScale() = with(_state.value) {
+    private fun changeStateToGrayScale() = with(state.value) {
         copy(
             selectedButton = DetailsState.SelectedButton.GreyScale,
             pictureUrl = "${picsumArg.downloadUrl}?grayscale",
@@ -71,7 +83,7 @@ class DetailsViewModel(
         ).postState()
     }
 
-    private fun changeStateToOriginal() = with(_state.value) {
+    private fun changeStateToOriginal() = with(state.value) {
         copy(
             selectedButton = DetailsState.SelectedButton.Original,
             pictureUrl = picsumArg.downloadUrl,
@@ -79,13 +91,13 @@ class DetailsViewModel(
         ).postState()
     }
 
-    private fun changeStateToInfo() = with(_state.value) {
+    private fun changeStateToInfo() = with(state.value) {
         copy(
             layoutState = DetailsState.LayoutState.Info
         ).postState()
     }
 
-    private fun changeStateToCloseInfo() = with(_state.value) {
+    private fun changeStateToCloseInfo() = with(state.value) {
         when (selectedButton) {
             DetailsState.SelectedButton.Original -> changeStateToOriginal()
             DetailsState.SelectedButton.GreyScale -> changeStateToGrayScale()
@@ -94,7 +106,9 @@ class DetailsViewModel(
     }
 
     private fun DetailsState.postState() {
-        _state.value = this
+        viewModelScope.launch {
+            _state.emit(this@postState)
+        }
     }
 
     private fun initialState(): DetailsState = DetailsState(
@@ -102,12 +116,6 @@ class DetailsViewModel(
         selectedButton = DetailsState.SelectedButton.Original,
         blurValue = BlurValue(1),
         layoutState = DetailsState.LayoutState.Init,
-        info = initialInfo(),
-    )
-
-    private fun initialInfo(): DetailsState.Info = DetailsState.Info(
-        author = null,
-        width = null,
-        height = null,
+        info = null,
     )
 }

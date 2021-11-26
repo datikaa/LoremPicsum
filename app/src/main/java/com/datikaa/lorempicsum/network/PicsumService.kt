@@ -13,6 +13,6 @@ interface PicsumService {
     @GET("v2/list")
     suspend fun list(@Query("page") page: Int, @Query("limit") limit: Int): List<PicsumResponseItem>
 
-    @GET("v2/id/{id}/info")
+    @GET("id/{id}/info")
     suspend fun info(@Path("id") id: Int): PicsumResponseItem
 }

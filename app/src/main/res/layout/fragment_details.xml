@@ -6,6 +6,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <import type="com.datikaa.lorempicsum.feature.picture_detail.dynamics.DetailsState.SelectedButton" />
 
         <variable
@@ -34,18 +36,6 @@
             app:layoutDescription="@xml/fragment_details_xml_main_scene"
             app:transitionState="@{state.layoutState}"
             tools:context=".feature.main_pager.MainPagerFragment">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/info_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:alpha="@{state.info == null ? 0 : 1}"
-                android:padding="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/outline_info_24"
-                app:tint="@color/white"
-                tools:alpha="1" />
 
             <com.google.android.material.button.MaterialButtonToggleGroup
                 android:id="@+id/button_group"
@@ -186,5 +176,16 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
         </androidx.constraintlayout.motion.widget.MotionLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/info_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:visibility="@{state.info == null ? View.INVISIBLE : View.VISIBLE}"
+            android:layout_gravity="top|end"
+            app:srcCompat="@drawable/outline_info_24"
+            app:tint="@color/white"
+            tools:alpha="1" />
     </FrameLayout>
 </layout>
