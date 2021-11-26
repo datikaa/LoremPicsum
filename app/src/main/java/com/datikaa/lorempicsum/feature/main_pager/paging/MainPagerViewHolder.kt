@@ -1,12 +1,9 @@
 package com.datikaa.lorempicsum.feature.main_pager.paging
 import android.widget.ImageView
-import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.datikaa.lorempicsum.R
 import com.datikaa.lorempicsum.databinding.MainListItemBinding
 import com.datikaa.lorempicsum.extension.setCompatTransitionName
-import com.datikaa.lorempicsum.feature.main_pager.model.MainPagerItemModel
-import com.datikaa.lorempicsum.feature.main_pager.model.url
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import java.lang.Exception

@@ -5,7 +5,10 @@ data class MainPagerItemModel(
     val width: Int,
     val height: Int,
     val downloadUrl: String,
-)
+) {
 
-val MainPagerItemModel.url: String
-    get() = "https://picsum.photos/id/$id/$width/$height"
+    val url: String
+        get() = "https://picsum.photos/id/$id/$width/$height"
+}
+
+
