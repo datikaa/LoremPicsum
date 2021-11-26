@@ -6,6 +6,7 @@ data class DetailsState(
     val pictureUrl: String,
     val selectedButton: SelectedButton,
     val blurValue: BlurValue,
+    val layoutState: LayoutState,
 ) {
 
     val intBlurValue: Int
@@ -15,6 +16,13 @@ data class DetailsState(
         Original,
         GreyScale,
         Blur
+    }
+
+    enum class LayoutState {
+        Init,
+        NoBlur,
+        ShowBlur,
+        Info,
     }
 }
 

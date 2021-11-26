@@ -34,6 +34,7 @@ class DetailsFragment : Fragment() {
     ): View {
         return FragmentDetailsBinding.inflate(inflater, container, false).apply {
             this.lifecycleOwner = this@DetailsFragment.viewLifecycleOwner
+            this.state = viewModel.state.value
             binding = this
         }.root
     }
@@ -52,6 +53,7 @@ class DetailsFragment : Fragment() {
 
             motionLayout.doOnApplyWindowInsets { v, windowInsets, initialPadding ->
                 v.updatePadding(
+                    top = initialPadding.top + windowInsets.systemWindowInsetTop,
                     bottom = initialPadding.bottom + windowInsets.systemWindowInsetBottom,
                     left = initialPadding.left + windowInsets.systemWindowInsetLeft,
                     right = initialPadding.right + windowInsets.systemWindowInsetRight,

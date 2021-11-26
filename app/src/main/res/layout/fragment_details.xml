@@ -30,10 +30,20 @@
             android:id="@+id/motion_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:clipToPadding="false"
             app:layoutDescription="@xml/fragment_details_xml_main_scene"
-            app:transitionState="@{state.selectedButton == SelectedButton.Blur ? @id/show_blur : @id/no_blur}"
+            app:transitionState="@{state.layoutState}"
             tools:context=".feature.main_pager.MainPagerFragment">
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/info_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/outline_info_24"
+                app:tint="@color/white" />
 
             <com.google.android.material.button.MaterialButtonToggleGroup
                 android:id="@+id/button_group"
