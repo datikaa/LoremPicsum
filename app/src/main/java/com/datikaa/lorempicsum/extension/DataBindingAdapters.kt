@@ -1,5 +1,6 @@
 package com.datikaa.lorempicsum.extension
 
+import android.view.View
 import android.widget.ImageView
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.databinding.BindingAdapter
@@ -37,4 +38,9 @@ fun convertDetailsStateLayoutStateToId(layoutState: DetailsState.LayoutState): I
 
 @BindingConversion
 fun convertBlurValueToInt(blurValue: BlurValue): Float = blurValue.value.toFloat()
+
+@BindingAdapter("animatedVisibility")
+fun View.setAnimatedVisibility(visibility: Int) {
+    animateVisibility(visibility)
+}
 

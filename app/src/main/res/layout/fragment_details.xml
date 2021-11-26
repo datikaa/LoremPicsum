@@ -183,8 +183,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="top|end"
             android:padding="10dp"
-            android:animateLayoutChanges="true"
-            android:visibility="@{state.info == null ? View.INVISIBLE : View.VISIBLE}"
+            android:visibility="invisible"
+            app:animatedVisibility="@{state.info == null ? View.INVISIBLE : View.VISIBLE}"
             app:srcCompat="@drawable/outline_info_24"
             app:tint="@color/white"
             tools:alpha="1" />
