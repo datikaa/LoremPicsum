@@ -6,7 +6,7 @@
 
     <data>
 
-        <import type="com.datikaa.lorempicsum.feature.picture_detail.dynamics.DetailsState" />
+        <import type="com.datikaa.lorempicsum.feature.picture_detail.dynamics.DetailsState.SelectedButton" />
 
         <variable
             name="state"

@@ -25,6 +25,6 @@
         tools:layout="@layout/fragment_details" >
         <argument
             android:name="picsumArg"
-            app:argType="com.datikaa.lorempicsum.feature.picture_detail.DetailsFragmentPicsumArg" />
+            app:argType="com.datikaa.lorempicsum.feature.picture_detail.tools.DetailsFragmentPicsumArg" />
     </fragment>
 </navigation>
