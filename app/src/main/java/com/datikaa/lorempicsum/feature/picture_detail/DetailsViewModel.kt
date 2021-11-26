@@ -26,10 +26,11 @@ class DetailsViewModel(
     val state: StateFlow<DetailsState>
 
     init {
+        // Grab saved state if exists else create new initialState
         val initState = savedStateHandle["state"] ?: initialState()
         _state = MutableStateFlow(initState)
         state = _state
-            .onEach { savedStateHandle["state"] = it }
+            .onEach { savedStateHandle["state"] = it } // save state
             .stateIn(viewModelScope, SharingStarted.Eagerly, initState)
         viewModelScope.launch {
             delay(50) // just to have a little time for the initState to work properly
@@ -37,6 +38,7 @@ class DetailsViewModel(
                 pictureUrl = picsumArg.downloadUrl,
                 layoutState = DetailsState.LayoutState.NoBlur,
             ).postState()
+            // fetch specific info for given id and post new state if success
             val picsumResponseItem = failSafe {
                 picsumService.info(picsumArg.id)
             } ?: return@launch
