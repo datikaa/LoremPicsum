@@ -11,7 +11,10 @@ import java.lang.Exception
 class MainPagerViewHolder(val binding: MainListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(model: MainPagerItemModel?) {
-        model ?: return // TODO: handle error nicer
+        if (model == null) {
+            Picasso.get().load(R.drawable.homer_doh).into(binding.imageView)
+            return
+        }
         binding.imageView.setCompatTransitionName("imageView_${model.id}")
         binding.imageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
         Picasso.get().load(model.url).placeholder(R.drawable.loading_gif).into(binding.imageView, object : Callback {
