@@ -1,4 +1,4 @@
-package com.datikaa.lorempicsum.feature.main_pager.model
+package com.datikaa.lorempicsum.feature.main_pager.paging
 
 data class MainPagerItemModel(
     val id: Int,
