@@ -37,7 +37,9 @@ class DetailsViewModel(
                 pictureUrl = picsumArg.downloadUrl,
                 layoutState = DetailsState.LayoutState.NoBlur,
             ).postState()
-            val picsumResponseItem = picsumService.info(picsumArg.id)
+            val picsumResponseItem = failSafe {
+                picsumService.info(picsumArg.id)
+            } ?: return@launch
             state.value.copy(
                 info = DetailsState.Info(
                     id = "${picsumResponseItem.id}",
@@ -130,4 +132,10 @@ class DetailsViewModel(
         layoutState = DetailsState.LayoutState.Init,
         info = null,
     )
+
+    private suspend fun <T> failSafe(action: suspend () -> T): T? = try {
+        action()
+    } catch (e: Exception) {
+        null
+    }
 }
