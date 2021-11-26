@@ -92,7 +92,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginBottom="20dp"
                 app:cardBackgroundColor="@color/segmented_button_color_selector"
                 app:layout_constrainedWidth="true"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -101,6 +100,7 @@
 
                 <com.google.android.material.slider.Slider
                     android:id="@+id/slider"
+                    style="@style/Theme.LoremPicsum.Slider"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="5dp"
@@ -172,7 +172,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/baseline_close_18"
-                        app:tint="?attr/colorPrimary" />
+                        app:tint="@color/segmented_button_text_color_selector" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
         </androidx.constraintlayout.motion.widget.MotionLayout>

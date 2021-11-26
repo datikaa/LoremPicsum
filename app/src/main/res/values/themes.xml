@@ -20,4 +20,7 @@
         <item name="backgroundTint">@color/segmented_button_color_selector</item>
         <item name="android:textColor">@color/segmented_button_text_color_selector</item>
     </style>
+    <style name="Theme.LoremPicsum.Slider" parent="Widget.MaterialComponents.Slider">
+    </style>
+
 </resources>
