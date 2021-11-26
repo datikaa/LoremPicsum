@@ -1,16 +1,19 @@
 package com.datikaa.lorempicsum.feature.picture_detail
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import com.datikaa.lorempicsum.R
 import com.datikaa.lorempicsum.databinding.FragmentDetailsBinding
 import com.datikaa.lorempicsum.extension.*
+import com.datikaa.lorempicsum.feature.picture_detail.dynamics.DetailsDestination
 import com.datikaa.lorempicsum.feature.picture_detail.dynamics.DetailsIntent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -48,11 +51,6 @@ class DetailsFragment : Fragment() {
         with(binding!!) {
             imageView.setCompatTransitionName("imageView_${args.picsumArg.id}")
 
-            onEachWithLifecycle(viewModel.state) {
-                Log.d("teszt", it.toString())
-                state = it
-            }
-
             motionLayout.doOnApplyWindowInsets { v, windowInsets, initialPadding ->
                 v.updatePadding(
                     top = initialPadding.top + windowInsets.systemWindowInsetTop,
@@ -89,10 +87,29 @@ class DetailsFragment : Fragment() {
                 viewModel.submitIntent(DetailsIntent.CloseInfo)
             }
 
+            infoCardShareButton.setOnClickListener {
+                viewModel.submitIntent(DetailsIntent.Share)
+            }
+
+            onEachWithLifecycle(viewModel.state) {
+                state = it
+            }
+
             onEachWithLifecycle(slider.valueChangeFlow()) { (_, value, fromUser) ->
                 if (!fromUser) return@onEachWithLifecycle
                 viewModel.submitIntent(DetailsIntent.BlurValueChange(value.toBlurValue()))
             }
+
+            onEachWithLifecycle(viewModel.navigationFlow) {
+                when (it) {
+                    is DetailsDestination.Share -> sharePicture(it.url)
+                }
+            }
         }
+    }
+
+    private fun sharePicture(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW).apply { data = Uri.parse(url) }
+        startActivity(Intent.createChooser(intent, getString(R.string.text_share_picture)))
     }
 }

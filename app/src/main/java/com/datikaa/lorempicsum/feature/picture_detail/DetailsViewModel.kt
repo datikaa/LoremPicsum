@@ -2,22 +2,23 @@ package com.datikaa.lorempicsum.feature.picture_detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.datikaa.lorempicsum.feature.picture_detail.dynamics.DetailsDestination
 import com.datikaa.lorempicsum.feature.picture_detail.dynamics.DetailsIntent
 import com.datikaa.lorempicsum.feature.picture_detail.dynamics.DetailsState
 import com.datikaa.lorempicsum.feature.picture_detail.tools.BlurValue
 import com.datikaa.lorempicsum.feature.picture_detail.tools.DetailsFragmentPicsumArg
 import com.datikaa.lorempicsum.network.PicsumService
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class DetailsViewModel(
     private val picsumService: PicsumService,
     private val picsumArg: DetailsFragmentPicsumArg,
 ) : ViewModel() {
+
+    private val _navigationFlow = MutableSharedFlow<DetailsDestination>(replay = 0)
+    val navigationFlow: SharedFlow<DetailsDestination> = _navigationFlow
 
     private val _state: MutableStateFlow<DetailsState>
     val state: StateFlow<DetailsState>
@@ -35,9 +36,12 @@ class DetailsViewModel(
             val picsumResponseItem = picsumService.info(picsumArg.id)
             state.value.copy(
                 info = DetailsState.Info(
+                    id = "${picsumResponseItem.id}",
                     author = picsumResponseItem.author,
                     width = "${picsumResponseItem.width}",
                     height = "${picsumResponseItem.height}",
+                    url = picsumResponseItem.url,
+                    downloadUrl = picsumResponseItem.downloadUrl,
                 )
             ).postState()
         }
@@ -50,6 +54,7 @@ class DetailsViewModel(
             DetailsIntent.Original -> changeStateToOriginal()
             DetailsIntent.Info -> changeStateToInfo()
             DetailsIntent.CloseInfo -> changeStateToCloseInfo()
+            DetailsIntent.Share -> initiateShare()
             is DetailsIntent.BlurValueChange -> changeStateBlurValue(detailsIntent.blurValue)
         }
     }
@@ -99,6 +104,12 @@ class DetailsViewModel(
             DetailsState.SelectedButton.Original -> changeStateToOriginal()
             DetailsState.SelectedButton.GreyScale -> changeStateToGrayScale()
             DetailsState.SelectedButton.Blur -> changeStateToBlur()
+        }
+    }
+
+    private fun initiateShare() = with(state.value) {
+        viewModelScope.launch {
+            info?.url?.also { _navigationFlow.emit(DetailsDestination.Share(it)) }
         }
     }
 

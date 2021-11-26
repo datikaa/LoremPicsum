@@ -8,5 +8,6 @@ sealed class DetailsIntent {
     object Blur : DetailsIntent()
     object Info : DetailsIntent()
     object CloseInfo : DetailsIntent()
+    object Share : DetailsIntent()
     data class BlurValueChange(val blurValue: BlurValue) : DetailsIntent()
 }

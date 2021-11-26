@@ -27,9 +27,12 @@ data class DetailsState(
     }
 
     data class Info(
+        val id: String?,
         val author: String?,
         val width: String?,
         val height: String?,
+        val url: String?,
+        val downloadUrl: String?,
     )
 }
 
