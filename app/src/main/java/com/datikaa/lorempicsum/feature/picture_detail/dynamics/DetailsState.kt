@@ -7,6 +7,7 @@ data class DetailsState(
     val selectedButton: SelectedButton,
     val blurValue: BlurValue,
     val layoutState: LayoutState,
+    val info: Info?
 ) {
 
     val intBlurValue: Int
@@ -24,6 +25,12 @@ data class DetailsState(
         ShowBlur,
         Info,
     }
+
+    data class Info(
+        val author: String?,
+        val width: String?,
+        val height: String?,
+    )
 }
 
 

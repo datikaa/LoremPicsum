@@ -39,25 +39,28 @@
                 android:id="@+id/info_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:alpha="@{state.info == null ? 0 : 1}"
                 android:padding="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/outline_info_24"
-                app:tint="@color/white" />
+                app:tint="@color/white"
+                tools:alpha="1" />
 
             <com.google.android.material.button.MaterialButtonToggleGroup
                 android:id="@+id/button_group"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="5dp"
                 android:clipToPadding="false"
                 android:padding="10dp"
                 app:layout_constrainedWidth="true"
-                app:layout_constraintBottom_toTopOf="@id/slider_card"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
                 app:selectionRequired="true"
                 app:singleSelection="true">
 
@@ -102,7 +105,7 @@
                 android:layout_marginBottom="20dp"
                 app:cardBackgroundColor="@color/segmented_button_color_selector"
                 app:layout_constrainedWidth="true"
-                app:layout_constraintBottom_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/button_group"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
@@ -116,6 +119,71 @@
                     android:value="@{state.intBlurValue}"
                     android:valueFrom="1.0"
                     android:valueTo="10.0" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/info_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/author"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@{@string/text_author(state.info.author)}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Author: datiKaa" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/width"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@{@string/text_width(state.info.width)}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/author"
+                        tools:text="Width: 3600px" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/height"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="@{@string/text_height(state.info.height)}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/width"
+                        tools:text="Height: 2000px" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/info_card_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/baseline_close_18"
+                        app:tint="?attr/colorPrimary" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
         </androidx.constraintlayout.motion.widget.MotionLayout>
     </FrameLayout>

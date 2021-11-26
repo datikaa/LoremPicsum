@@ -21,12 +21,7 @@ class DetailsViewModel(
     val state: StateFlow<DetailsState>
 
     init {
-        val initState = DetailsState(
-            pictureUrl = picsumArg.url,
-            selectedButton = DetailsState.SelectedButton.Original,
-            blurValue = BlurValue(1),
-            layoutState = DetailsState.LayoutState.Init,
-        )
+        val initState = initialState()
         _state = MutableStateFlow(initState)
         state = _state.stateIn(viewModelScope, SharingStarted.Eagerly, initState)
         viewModelScope.launch {
@@ -44,6 +39,8 @@ class DetailsViewModel(
             DetailsIntent.Blur -> changeStateToBlur()
             DetailsIntent.GrayScale -> changeStateToGrayScale()
             DetailsIntent.Original -> changeStateToOriginal()
+            DetailsIntent.Info -> changeStateToInfo()
+            DetailsIntent.CloseInfo -> changeStateToCloseInfo()
             is DetailsIntent.BlurValueChange -> changeStateBlurValue(detailsIntent.blurValue)
         }
     }
@@ -82,7 +79,35 @@ class DetailsViewModel(
         ).postState()
     }
 
+    private fun changeStateToInfo() = with(_state.value) {
+        copy(
+            layoutState = DetailsState.LayoutState.Info
+        ).postState()
+    }
+
+    private fun changeStateToCloseInfo() = with(_state.value) {
+        when (selectedButton) {
+            DetailsState.SelectedButton.Original -> changeStateToOriginal()
+            DetailsState.SelectedButton.GreyScale -> changeStateToGrayScale()
+            DetailsState.SelectedButton.Blur -> changeStateToBlur()
+        }
+    }
+
     private fun DetailsState.postState() {
         _state.value = this
     }
+
+    private fun initialState(): DetailsState = DetailsState(
+        pictureUrl = picsumArg.url,
+        selectedButton = DetailsState.SelectedButton.Original,
+        blurValue = BlurValue(1),
+        layoutState = DetailsState.LayoutState.Init,
+        info = initialInfo(),
+    )
+
+    private fun initialInfo(): DetailsState.Info = DetailsState.Info(
+        author = null,
+        width = null,
+        height = null,
+    )
 }

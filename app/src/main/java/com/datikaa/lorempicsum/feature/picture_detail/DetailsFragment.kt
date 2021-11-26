@@ -70,6 +70,14 @@ class DetailsFragment : Fragment() {
                 viewModel.submitIntent(intent)
             }
 
+            infoButton.setOnClickListener {
+                viewModel.submitIntent(DetailsIntent.Info)
+            }
+
+            infoCardButton.setOnClickListener {
+                viewModel.submitIntent(DetailsIntent.CloseInfo)
+            }
+
             onEachWithLifecycle(slider.valueChangeFlow()) { (_, value, fromUser) ->
                 if (!fromUser) return@onEachWithLifecycle
                 viewModel.submitIntent(DetailsIntent.BlurValueChange(value.toBlurValue()))

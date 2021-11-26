@@ -3,4 +3,7 @@
     <string name="text_original">Original</string>
     <string name="text_grayscale">Grayscale</string>
     <string name="text_blur">Blur</string>
+    <string name="text_author">Author: %1$s</string>
+    <string name="text_height">Height: %1$spx</string>
+    <string name="text_width">Width: %1$spx</string>
 </resources>
