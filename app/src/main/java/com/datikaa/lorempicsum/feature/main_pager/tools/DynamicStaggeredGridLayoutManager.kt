@@ -6,6 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.datikaa.lorempicsum.extension.displayMetrics
 
+/**
+ * A [StaggeredGridLayoutManager] implementation that changes span count depending on screen width
+ */
 class DynamicStaggeredGridLayoutManager : StaggeredGridLayoutManager {
 
     @JvmOverloads
