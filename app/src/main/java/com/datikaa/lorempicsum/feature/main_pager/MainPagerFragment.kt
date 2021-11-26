@@ -16,7 +16,7 @@ import com.datikaa.lorempicsum.extension.calculatedUrl
 import com.datikaa.lorempicsum.extension.doOnApplyWindowInsets
 import com.datikaa.lorempicsum.extension.onEachWithLifecycle
 import com.datikaa.lorempicsum.feature.main_pager.dynamics.MainPagerIntent
-import com.datikaa.lorempicsum.feature.main_pager.dynamics.MainPagerNavigation
+import com.datikaa.lorempicsum.feature.main_pager.dynamics.MainPagerDestination
 import com.datikaa.lorempicsum.feature.main_pager.paging.MainPagerAdapter
 import com.datikaa.lorempicsum.feature.picture_detail.tools.DetailsFragmentPicsumArg
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -58,7 +58,7 @@ class MainPagerFragment : Fragment() {
 
         onEachWithLifecycle(viewModel.navigationFlow) {
             when (it) {
-                is MainPagerNavigation.ToDetails -> navigateToDetails(it.picsumPicture)
+                is MainPagerDestination.Details -> navigateToDetails(it.picsumPicture)
             }
         }
 

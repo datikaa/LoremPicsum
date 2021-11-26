@@ -7,7 +7,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.datikaa.lorempicsum.domain.data.PicsumPicture
 import com.datikaa.lorempicsum.feature.main_pager.dynamics.MainPagerIntent
-import com.datikaa.lorempicsum.feature.main_pager.dynamics.MainPagerNavigation
+import com.datikaa.lorempicsum.feature.main_pager.dynamics.MainPagerDestination
 import com.datikaa.lorempicsum.feature.main_pager.paging.MainPagerPagingSource
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -26,18 +26,18 @@ class MainPagerViewModel(
         mainPagerPagingSource
     }.flow.cachedIn(viewModelScope)
 
-    private val _navigationFlow = MutableSharedFlow<MainPagerNavigation>(replay = 0)
-    val navigationFlow: SharedFlow<MainPagerNavigation> = _navigationFlow
+    private val _navigationFlow = MutableSharedFlow<MainPagerDestination>(replay = 0)
+    val navigationFlow: SharedFlow<MainPagerDestination> = _navigationFlow
 
     fun submitIntent(intent: MainPagerIntent) = when(intent) {
         is MainPagerIntent.ShowDetails -> navigateToDetails(intent.picsumPicture)
     }
 
     private fun navigateToDetails(picsumPicture: PicsumPicture) {
-        MainPagerNavigation.ToDetails(picsumPicture).dispatchNavigation()
+        MainPagerDestination.Details(picsumPicture).dispatchNavigation()
     }
 
-    private fun MainPagerNavigation.dispatchNavigation() {
+    private fun MainPagerDestination.dispatchNavigation() {
         viewModelScope.launch {
             _navigationFlow.emit(this@dispatchNavigation)
         }
