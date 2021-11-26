@@ -203,16 +203,23 @@
             </com.google.android.material.card.MaterialCardView>
         </androidx.constraintlayout.motion.widget.MotionLayout>
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/info_button"
-            android:layout_width="wrap_content"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="top|end"
-            android:padding="10dp"
-            android:visibility="invisible"
-            app:animatedVisibility="@{state.info == null ? View.INVISIBLE : View.VISIBLE}"
-            app:srcCompat="@drawable/outline_info_24"
-            app:tint="@color/white"
-            tools:alpha="1" />
+            app:title="@{null}">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/info_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="20dp"
+                android:visibility="invisible"
+                app:animatedVisibility="@{state.info == null ? View.INVISIBLE : View.VISIBLE}"
+                app:srcCompat="@drawable/outline_info_24"
+                app:tint="@color/white"
+                tools:alpha="1" />
+        </com.google.android.material.appbar.MaterialToolbar>
     </FrameLayout>
 </layout>

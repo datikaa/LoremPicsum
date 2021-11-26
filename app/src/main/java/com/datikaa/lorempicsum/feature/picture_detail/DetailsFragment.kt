@@ -9,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.ui.setupWithNavController
 import com.datikaa.lorempicsum.R
 import com.datikaa.lorempicsum.databinding.FragmentDetailsBinding
 import com.datikaa.lorempicsum.extension.*
@@ -60,14 +62,15 @@ class DetailsFragment : Fragment() {
                 )
             }
 
-            infoButton.doOnApplyWindowInsets { v, windowInsets, initialPadding ->
+            toolbar.doOnApplyWindowInsets { v, windowInsets, initialPadding ->
                 v.updatePadding(
                     top = initialPadding.top + windowInsets.systemWindowInsetTop,
-                    bottom = initialPadding.bottom + windowInsets.systemWindowInsetBottom,
                     left = initialPadding.left + windowInsets.systemWindowInsetLeft,
                     right = initialPadding.right + windowInsets.systemWindowInsetRight,
                 )
             }
+
+            toolbar.setupWithNavController(findNavController())
 
             buttonGroup.addOnButtonCheckedListener { _, checkedId, _ ->
                 val intent = when (checkedId) {
