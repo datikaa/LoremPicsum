@@ -1,7 +1,5 @@
 package com.datikaa.lorempicsum.feature.picture_detail.dynamics
 
-import com.datikaa.lorempicsum.feature.picture_detail.tools.BlurValue
-
 sealed class DetailsIntent {
     object Original : DetailsIntent()
     object GrayScale : DetailsIntent()
@@ -9,5 +7,5 @@ sealed class DetailsIntent {
     object Info : DetailsIntent()
     object CloseInfo : DetailsIntent()
     object Share : DetailsIntent()
-    data class BlurValueChange(val blurValue: BlurValue) : DetailsIntent()
+    data class BlurValueChange(val blurValue: Int) : DetailsIntent()
 }

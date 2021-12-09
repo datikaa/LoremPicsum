@@ -7,7 +7,6 @@ import android.view.View
 import com.datikaa.lorempicsum.R
 import com.datikaa.lorempicsum.domain.data.PicsumPicture
 import com.datikaa.lorempicsum.feature.main_pager.paging.MainPagerItemModel
-import com.datikaa.lorempicsum.feature.picture_detail.tools.BlurValue
 import com.datikaa.lorempicsum.network.response.PicsumResponseItem
 
 /**
@@ -49,11 +48,6 @@ fun PicsumPicture.calculateSize(): PicsumPicture {
  */
 val PicsumPicture.calculatedUrl: String
     get() = "https://picsum.photos/id/$id/$width/$height"
-
-/**
- * Converts [Float] to [BlurValue]
- */
-fun Float.toBlurValue() = BlurValue(this.toInt())
 
 /**
  * Animate view's visibility change. Supports on the fly animation reverse

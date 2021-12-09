@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.datikaa.lorempicsum.feature.picture_detail.dynamics.DetailsDestination
 import com.datikaa.lorempicsum.feature.picture_detail.dynamics.DetailsIntent
 import com.datikaa.lorempicsum.feature.picture_detail.dynamics.DetailsState
-import com.datikaa.lorempicsum.feature.picture_detail.tools.BlurValue
 import com.datikaa.lorempicsum.feature.picture_detail.tools.DetailsFragmentPicsumArg
 import com.datikaa.lorempicsum.network.PicsumService
 import kotlinx.coroutines.delay
@@ -32,26 +31,28 @@ class DetailsViewModel(
         state = _state
             .onEach { savedStateHandle["state"] = it } // save state
             .stateIn(viewModelScope, SharingStarted.Eagerly, initState)
-        viewModelScope.launch {
-            delay(50) // just to have a little time for the initState to work properly
-            state.value.copy(
-                pictureUrl = picsumArg.downloadUrl,
-                layoutState = DetailsState.LayoutState.NoBlur,
-            ).postState()
-            // fetch specific info for given id and post new state if success
-            val picsumResponseItem = failSafe {
-                picsumService.info(picsumArg.id)
-            } ?: return@launch
-            state.value.copy(
-                info = DetailsState.Info(
-                    id = "${picsumResponseItem.id}",
-                    author = picsumResponseItem.author,
-                    width = "${picsumResponseItem.width}",
-                    height = "${picsumResponseItem.height}",
-                    url = picsumResponseItem.url,
-                    downloadUrl = picsumResponseItem.downloadUrl,
-                )
-            ).postState()
+        if (initState.layoutState == DetailsState.LayoutState.Init) {
+            viewModelScope.launch {
+                delay(50) // just to have a little time for the initState to work properly
+                state.value.copy(
+                    pictureUrl = picsumArg.downloadUrl,
+                    layoutState = DetailsState.LayoutState.NoBlur,
+                ).postState()
+                // fetch specific info for given id and post new state if success
+                val picsumResponseItem = failSafe {
+                    picsumService.info(picsumArg.id)
+                } ?: return@launch
+                state.value.copy(
+                    info = DetailsState.Info(
+                        id = "${picsumResponseItem.id}",
+                        author = picsumResponseItem.author,
+                        width = "${picsumResponseItem.width}",
+                        height = "${picsumResponseItem.height}",
+                        url = picsumResponseItem.url,
+                        downloadUrl = picsumResponseItem.downloadUrl,
+                    )
+                ).postState()
+            }
         }
     }
 
@@ -70,17 +71,17 @@ class DetailsViewModel(
     private fun changeStateToBlur() = with(state.value) {
         copy(
             selectedButton = DetailsState.SelectedButton.Blur,
-            pictureUrl = "${picsumArg.downloadUrl}?blur=${blurValue.value}",
+            pictureUrl = "${picsumArg.downloadUrl}?blur=${blurValue}",
             layoutState = DetailsState.LayoutState.ShowBlur,
         ).postState()
     }
 
-    private fun changeStateBlurValue(blurValue: BlurValue) = with(state.value) {
+    private fun changeStateBlurValue(blurValue: Int) = with(state.value) {
         if (this.blurValue == blurValue) return@with
         copy(
             blurValue = blurValue,
             selectedButton = DetailsState.SelectedButton.Blur,
-            pictureUrl = "${picsumArg.downloadUrl}?blur=${blurValue.value}",
+            pictureUrl = "${picsumArg.downloadUrl}?blur=${blurValue}",
             layoutState = DetailsState.LayoutState.ShowBlur,
         ).postState()
     }
@@ -130,7 +131,7 @@ class DetailsViewModel(
     private fun initialState(): DetailsState = DetailsState(
         pictureUrl = picsumArg.url,
         selectedButton = DetailsState.SelectedButton.Original,
-        blurValue = BlurValue(1),
+        blurValue = 1,
         layoutState = DetailsState.LayoutState.Init,
         info = null,
     )

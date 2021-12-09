@@ -100,7 +100,7 @@ class DetailsFragment : Fragment() {
 
             onEachWithLifecycle(slider.valueChangeFlow()) { (_, value, fromUser) ->
                 if (!fromUser) return@onEachWithLifecycle
-                viewModel.submitIntent(DetailsIntent.BlurValueChange(value.toBlurValue()))
+                viewModel.submitIntent(DetailsIntent.BlurValueChange(value.toInt()))
             }
 
             onEachWithLifecycle(viewModel.navigationFlow) {

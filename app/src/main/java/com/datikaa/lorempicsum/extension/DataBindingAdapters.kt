@@ -7,8 +7,6 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.BindingConversion
 import com.datikaa.lorempicsum.R
 import com.datikaa.lorempicsum.feature.picture_detail.dynamics.DetailsState
-import com.datikaa.lorempicsum.feature.picture_detail.tools.BlurValue
-import com.google.android.material.slider.Slider
 import com.squareup.picasso.Picasso
 
 @BindingAdapter("picassoUrl")
@@ -23,11 +21,6 @@ fun MotionLayout.transitionState(state: Int) {
     transitionToState(state)
 }
 
-@BindingAdapter("blurValue")
-fun Slider.setBlurValue(blurValue: BlurValue) {
-    value = blurValue.value.toFloat()
-}
-
 @BindingConversion
 fun convertDetailsStateLayoutStateToId(layoutState: DetailsState.LayoutState): Int = when(layoutState) {
     DetailsState.LayoutState.Init -> R.id.init
@@ -35,9 +28,6 @@ fun convertDetailsStateLayoutStateToId(layoutState: DetailsState.LayoutState): I
     DetailsState.LayoutState.ShowBlur -> R.id.show_blur
     DetailsState.LayoutState.Info -> R.id.info
 }
-
-@BindingConversion
-fun convertBlurValueToInt(blurValue: BlurValue): Float = blurValue.value.toFloat()
 
 @BindingAdapter("animatedVisibility")
 fun View.setAnimatedVisibility(visibility: Int) {
